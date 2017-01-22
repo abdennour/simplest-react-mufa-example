@@ -1,6 +1,8 @@
-# simplest-react-mufa-example
-Mufa with React : Event oriented programming
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
+
+# simplest-react-mufa-example
+
+Mufa with React : Event oriented programming
 
 For beginners  to learn the concepts in [Mufa](https://github.com/abdennour/mufa)
 
