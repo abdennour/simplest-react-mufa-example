@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import Mufa from 'mufa';
-
-// Init Mufa instance for the whole app.
-const mufa = new Mufa();
+import {mufa} from 'mufa';
 
 class SearchGithubUser extends Component {
   constructor() {
