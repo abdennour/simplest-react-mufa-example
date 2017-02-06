@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import {mufa} from 'mufa';
+import {on, fire} from 'mufa';
 
 class SearchGithubUser extends Component {
   constructor() {
@@ -9,17 +9,17 @@ class SearchGithubUser extends Component {
   }
 
   componentDidMount() {
-    mufa.on('success_userInfo_request', (response) =>
-       this.setState({data: JSON.stringify(response)})
+    on('success_userInfo_request', (response) =>
+       this.setState({data: (<img src={response.avatar_url} />)})
     );
 
-    mufa.on('fail_userInfo_request', (message) =>
+    on('fail_userInfo_request', (message) =>
        this.setState({data: message})
     );
   }
 
   handleClick(){
-    mufa.fire('start_userInfo_request', this.refs.input.value);
+    fire('start_userInfo_request', this.refs.input.value);
   }
 
   render() {
@@ -48,15 +48,15 @@ class GithubAPIService {
 const githubAPIService = new GithubAPIService();
 
 //-- Connect service(s) to Mufa
-mufa.on('start_userInfo_request', (username) => {
+on('start_userInfo_request', (username) => {
   githubAPIService.userInfo(username).then((response) => {
     if  (response && response.message === 'Not Found') {
-      mufa.fire('fail_userInfo_request', 'User is not found');
+      fire('fail_userInfo_request', 'User is not found');
     } else {
-      mufa.fire('success_userInfo_request', response)
+      fire('success_userInfo_request', response)
     }
   }).catch(() =>
-      mufa.fire('fail_userInfo_request', 'An error was occured!')
+      fire('fail_userInfo_request', 'An error was occured!')
   );
 });
 
